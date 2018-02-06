@@ -40,3 +40,15 @@
 .skills .btn {
     cursor: default;
 }
+
+.alert-success {
+    color: #00796B;
+    background-color: #B2DFDB;
+    border-color: #80CBC4;
+}
+
+.alert-danger {
+    color: #D32F2F;
+    background-color: #FFEBEE;
+    border-color: #EF9A9A;
+}

@@ -3,8 +3,8 @@
 $to = "hi@nicolaspennesi.com";
 
 // Setea variables
-$name = $_POST["callName"];
-$email = $_POST["callEmail"];
+$name = $_POST["name"];
+$email = $_POST["email"];
 $mensaje = $_POST["message"];
 
 //Prepara mail
@@ -19,7 +19,9 @@ $headers .= "Reply-To: " . $name . " <" . $email . ">" . "\r\n";
 
 //Envía Mail
 if (mail($to, $subject, $message, $headers)) {
+    header('Content-Type: application/json');
     echo '{"response":"success"}';
 } else {
+    http_response_code(422);
     echo "Error sending message, please try again later.";
 }

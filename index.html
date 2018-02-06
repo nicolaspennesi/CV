@@ -858,15 +858,23 @@
 									<div class="col-half-section col-half-section-right mr-3">
 										<h2 class="text-color-quaternary text-uppercase font-weight-extra-bold">Say Hello</h2>
 										<form id="callSendMessage" class="custom-form-style" action="php/mail.php" method="POST">
+											<div class="alert alert-success d-none mt-4" id="contactSuccess">
+												<strong>Success!</strong> Your message has been sent.
+											</div>
+
+											<div class="alert alert-danger d-none mt-4" id="contactError">
+												<strong>Error!</strong> There was an error sending your message. Please try later.
+												<span class="text-1 mt-2 d-block" id="contactErrorMessage"></span>
+											</div>
 											<div class="form-content">
 												<div class="form-control-custom">
-													<input type="text" class="form-control" name="callName" placeholder="Your Name *" data-msg-required="This field is required." required="" />
+													<input type="text" class="form-control" id="callName" name="callName" placeholder="Your Name *" data-msg-required="This field is required." required="" />
 												</div>
 												<div class="form-control-custom">
-													<input type="text" class="form-control" name="callEmail" placeholder="Email *" data-msg-required="This field is required." required="" />
+													<input type="email" class="form-control" id="callEmail" name="callEmail" placeholder="Email *" data-msg-required="This field is required." required="" />
 												</div>
 												<div class="form-control-custom">
-													<textarea maxlength="5000" data-msg-required="Please enter your message." rows="10" class="form-control" name="message" placeholder="Message*" required="" aria-required="true"></textarea>
+													<textarea maxlength="5000" data-msg-required="Please enter your message." rows="10" class="form-control" id="message" name="message" placeholder="Message*" required="" aria-required="true"></textarea>
 												</div>
 												<input type="submit" class="btn btn-quaternary text-color-light text-uppercase font-weight-semibold outline-none custom-btn-style-2 custom-border-radius-1" value="Submit" />
 											</div>

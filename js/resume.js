@@ -53,17 +53,82 @@ Theme Version:	6.0.0
 		timelineHeightAdjust.build();
 	}
 
-	// Contact Form Validate
+	// Contact Form
 	$('#callSendMessage').validate({
-		onkeyup: false,
-		onclick: false,
-		onfocusout: false,
-		errorPlacement: function(error, element) {
-			if (element.attr('type') == 'radio' || element.attr('type') == 'checkbox') {
-				error.appendTo(element.parent().parent());
-			} else {
-				error.insertAfter(element);
-			}
+		submitHandler: function(form) {
+
+			var $form = $(form),
+				$messageSuccess = $('#contactSuccess'),
+				$messageError = $('#contactError'),
+				$submitButton = $(this.submitButton),
+				$errorMessage = $('#contactErrorMessage'),
+				submitButtonText = $submitButton.val();
+
+			console.log($form.find('#callName').val());
+
+			$submitButton.val( $submitButton.data('loading-text') ? $submitButton.data('loading-text') : 'Loading...' ).attr('disabled', true);
+
+			// Ajax Submit
+			$.ajax({
+				type: 'POST',
+				url: $form.attr('action'),
+				data: {
+					name: $form.find('#callName').val(),
+					email: $form.find('#callEmail').val(),
+					message: $form.find('#message').val(),
+				}
+			}).always(function(data, textStatus, jqXHR) {
+
+				$errorMessage.empty().hide();
+
+				if (data.response == 'success') {
+
+					$messageSuccess.removeClass('d-none');
+					$messageError.addClass('d-none');
+
+					// Reset Form
+					$form.find('.form-control')
+						.val('')
+						.blur()
+						.parent()
+						.removeClass('has-success')
+						.removeClass('has-danger')
+						.find('label.error')
+						.remove();
+
+					if (($messageSuccess.offset().top - 80) < $(window).scrollTop()) {
+						$('html, body').animate({
+							scrollTop: $messageSuccess.offset().top - 80
+						}, 300);
+					}
+
+					$form.find('.form-control').removeClass('error');
+
+					$submitButton.val( submitButtonText ).attr('disabled', false);
+
+					return;
+
+				} else if (data.response == 'error' && typeof data.errorMessage !== 'undefined') {
+					$errorMessage.html(data.errorMessage).show();
+				} else {
+					$errorMessage.html(data.responseText).show();
+				}
+
+				$messageError.removeClass('d-none');
+				$messageSuccess.addClass('d-none');
+
+				if (($messageError.offset().top - 80) < $(window).scrollTop()) {
+					$('html, body').animate({
+						scrollTop: $messageError.offset().top - 80
+					}, 300);
+				}
+
+				$form.find('.has-success')
+					.removeClass('has-success');
+
+				$submitButton.val( submitButtonText ).attr('disabled', false);
+
+			});
 		}
 	});
 
@@ -74,7 +139,7 @@ Theme Version:	6.0.0
 
 	$(window).on('scroll', function(){
 	   var st = $(this).scrollTop();
-	   
+
 	   if (st > lastScrollTop){
 	   		$('img[custom-anim]').css({
 	   			transform: 'translate(0, -'+ st +'px)'
@@ -109,7 +174,7 @@ Theme Version:	6.0.0
 				divisor = $(document).height() / $(window).height();
 
 			    self.$menuFloating.find('.header-column > .header-row').css({
-			    	transform : 'translateY( calc('+ scrollPercent +'vh - '+ st / divisor +'px) )' 
+			    	transform : 'translateY( calc('+ scrollPercent +'vh - '+ st / divisor +'px) )'
 			    });
 			});
 		}
