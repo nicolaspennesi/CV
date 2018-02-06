@@ -1,0 +1,42 @@
+/* Add here all your CSS customizations */
+@media (min-width: 768px) {
+    .custom-list-style-1.second-column li span:nth-child(1) {
+        min-width: 60px;
+    }
+}
+
+.custom-social-icons li.social-icons-instagram a {
+	background: #795548;
+}
+
+.custom-thumb-info-2 .thumb-info-caption .custom-blog-post-share ul li a.item-instagram {
+	color: #795548;
+}
+
+.custom-social-icons li.social-icons-linkedin a {
+	background: #1178B3;
+}
+
+.custom-thumb-info-2 .thumb-info-caption .custom-blog-post-share ul li a.item-linkedin {
+	color: #1178B3;
+}
+
+.custom-social-icons li.social-icons-email a {
+	background: #424242;
+}
+
+.custom-thumb-info-2 .thumb-info-caption .custom-blog-post-share ul li a.item-email {
+	color: #424242;
+}
+
+.social-icons li:hover.social-icons-email a {
+    background: #616161;
+}
+
+.thumb-info.custom-thumb-info-1 .thumb-info-wrapper:after {
+	background: rgba(160, 160, 160, 0.25);
+}
+
+.skills .btn {
+    cursor: default;
+}
