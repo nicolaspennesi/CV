@@ -245,7 +245,7 @@
 											<ul class="custom-list-style-1 p-0 mb-0 second-column">
 												<li>
 													<span class="text-color-dark">Age:</span>
-													<span class="custom-text-color-2">26</span>
+													<span class="custom-text-color-2" id="actual-age"></span>
 												</li>
 												<li>
 													<span class="text-color-dark">Phone:</span>
@@ -973,6 +973,14 @@
 		<script src="vendor/owl.carousel/owl.carousel.min.js"></script>
 		<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 		<script src="vendor/vide/vide.min.js"></script>
+
+		<!-- Scripts -->
+		<script type="text/javascript">
+			var dob = new Date('1991-02-13');
+			var today = new Date();
+			var age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
+			$('#actual-age').html(age);
+		</script>
 
 		<!-- Theme Base, Components and Settings -->
 		<script src="js/theme.js"></script>
