@@ -1,5 +1,11 @@
 <?php
 
+if(empty($_POST["name"]) || empty($_POST["email"]) || empty($_POST["message"])){
+    http_response_code(422);
+    echo "Empty fields.";
+    die();
+}
+
 $to = "hi@nicolaspennesi.com";
 
 // Setea variables
